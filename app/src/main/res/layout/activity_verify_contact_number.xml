@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Verification.VerifyContactNumber"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sign_in_screen_bg"
+    >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/poppins"
+        android:text="We will send a SMS Code to your mobile number"
+        android:textAlignment="center"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txt_contactNumber"
+        android:layout_alignBottom="@+id/txt_contactNumber"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="-20dp"
+        android:fontFamily="@font/poppins"
+        android:text="e.g 09123456789"
+        android:textColor="#898989"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="205dp"
+        app:srcCompat="@drawable/iconwithname" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="We need to Verify You!"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/poppins"
+        android:text="Please input your mobile number to verify"
+        android:textAlignment="center"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        app:srcCompat="@drawable/dot_step2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/poppins"
+        android:text="We will send a SMS Code to your mobile number"
+        android:textAlignment="center"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txt_contactNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="370dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_textbox1"
+        android:ems="10"
+        android:hint="Enter Phone Number"
+        android:padding="18dp"
+        android:textColorHint="#B9B9B9"
+        android:textSize="15sp"
+        android:inputType="phone"
+        />
+
+    <EditText
+        android:id="@+id/txt_verificationCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_textbox1"
+        android:ems="10"
+        android:hint="SMS Code"
+        android:inputType="number"
+        android:maxLength="6"
+        android:padding="18dp"
+        android:textColorHint="#B9B9B9"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/btn_sendCode"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="467dp"
+        android:layout_marginLeft="180dp"
+        android:fontFamily="@font/poppins"
+        android:text="Send Code"
+        android:enabled="false"
+        android:layout_alignEnd="@+id/txt_verificationCode"
+        android:textAlignment="center"
+        android:textColor="#019874"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signUp"
+        android:layout_width="308dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/bg_button1"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="645dp"
+        android:layout_marginRight="60dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Already have an account?"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+       />
+
+    <TextView
+        android:id="@+id/btn_signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="645dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Sign In"
+        android:textAlignment="center"
+        android:textColor="#019874"
+        android:textSize="15sp"
+        />
+
+</RelativeLayout>

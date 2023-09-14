@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/iconwithname" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        app:srcCompat="@drawable/bgdoctor1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="465dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Smile Confidently With"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="495dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Our Dental Solutions"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="560dp"
+        android:layout_marginRight="65dp"
+        android:fontFamily="@font/roboto"
+        android:text="Every time you smile at someone, it is an action of love, a gift to that person, a beautiful thing."
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_getStarted"
+        android:layout_width="308dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/bg_button1"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Get Started"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+      />
+
+
+</RelativeLayout>

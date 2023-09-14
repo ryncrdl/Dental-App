@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/services_container"
+        android:layout_width="wrap_content"
+        android:layout_height="162dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        app:srcCompat="@drawable/rectangle_20"
+        android:padding="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/services_image"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_gravity="start|center_vertical"
+            android:background="@drawable/ellipse_1" />
+
+        <TextView
+            android:id="@+id/service_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="120dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/services_image"
+            android:maxEms="8"
+            android:singleLine="true"
+            android:text="Service Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/service_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/services_image"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:maxLines="4"
+            android:text="Our professional teeth whitening service is Our professional teeth whitening service is Our professional teeth whitening service is professional teeth whitening service is"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+
+
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SignUp.SignUp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sign_in_screen_bg"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="205dp"
+        app:srcCompat="@drawable/iconwithname" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="205dp"
+        app:srcCompat="@drawable/bg_textbox1" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Register With Us!"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/poppins"
+        android:text="Your Information is safe with us"
+        android:textAlignment="center"
+        android:textColor="#898989"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txt_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_textbox1"
+        android:ems="10"
+        android:hint="Enter your full name"
+        android:inputType="text"
+        android:padding="18dp"
+        android:textColorHint="#B9B9B9"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_textbox1"
+        android:ems="10"
+        android:hint="Enter your username"
+        android:inputType="text"
+        android:padding="18dp"
+        android:textColorHint="#B9B9B9"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_textbox1"
+        android:ems="10"
+        android:hint="Enter your password"
+        android:inputType="textPassword"
+        android:padding="18dp"
+        android:textColorHint="#B9B9B9"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/txt_confirmpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="560dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_textbox1"
+        android:ems="10"
+        android:hint="Confirm your password"
+        android:inputType="textPassword"
+        android:padding="18dp"
+        android:textColorHint="#B9B9B9"
+        android:textSize="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_nextstep"
+        android:layout_width="308dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginTop="635dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/bg_button1"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Next Step"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="700dp"
+        android:layout_marginRight="60dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Already have an account?"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/btn_signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="700dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Sign In"
+        android:textAlignment="center"
+        android:textColor="#019874"
+        android:textSize="15sp"
+       />
+</RelativeLayout>

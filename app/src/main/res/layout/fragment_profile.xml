@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile.ProfileFragment"
+    android:background="@drawable/sign_in_screen_bg"
+    >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="205dp"
+            app:srcCompat="@drawable/iconwithname" />
+
+        <!-- Current Password -->
+        <EditText
+            android:id="@+id/txt_current_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bg_textbox1"
+            android:ems="10"
+            android:hint="Current Password"
+            android:inputType="textPassword"
+            android:padding="18dp"
+            android:textColorHint="#B9B9B9"
+            android:textSize="15sp" />
+
+        <!-- New Password -->
+        <EditText
+            android:id="@+id/txt_new_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_current_password"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bg_textbox1"
+            android:ems="10"
+            android:hint="New Password"
+            android:inputType="textPassword"
+            android:padding="18dp"
+            android:textColorHint="#B9B9B9"
+            android:textSize="15sp" />
+
+        <!-- Confirm Password -->
+        <EditText
+            android:id="@+id/txt_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_new_password"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bg_textbox1"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:padding="18dp"
+            android:textColorHint="#B9B9B9"
+            android:textSize="15sp" />
+
+        <!-- Change Password Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_confirm_password"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_button1"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="18dp"
+            android:text="Change Password"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <!-- Log Out Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_button2"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="18dp"
+            android:text="Log Out"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+</RelativeLayout>

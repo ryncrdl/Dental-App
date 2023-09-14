@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome_screen"
+    tools:context=".Home.HomeFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="205dp"
+        app:srcCompat="@drawable/iconwithname" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ellipse_1"
+        android:onClick="goToProfile"/>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Treat Yourself"
+        android:layout_marginTop="125dp"
+        android:layout_marginLeft="180dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="With Beautiful"
+        android:layout_marginTop="153dp"
+        android:layout_marginLeft="180dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="White"
+        android:layout_marginTop="178dp"
+        android:layout_marginLeft="125dp"
+        android:textAlignment="center"
+        android:textColor="#019874"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Smile"
+        android:layout_marginTop="178dp"
+        android:layout_marginLeft="230dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        app:srcCompat="@drawable/image_1" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        app:srcCompat="@drawable/image_2" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="335dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="need in one place"
+        android:textAlignment="center"
+        android:textColor="#E5FFF8"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Everything you"
+        android:textAlignment="center"
+        android:textColor="#E5FFF8"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="525dp"
+        android:translationZ="90dp"
+        app:srcCompat="@drawable/undraw_medicine_b1ol__1__1" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_marginRight="135dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Book An Appointment"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:translationZ="90dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_check_services"
+        android:layout_width="146.38dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/bg_textbox1"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Check Services"
+        android:textColor="#019874"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        app:srcCompat="@drawable/rectangle_10" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginRight="170dp"
+        android:fontFamily="@font/poppins"
+        android:text="Check your teeth condition regularly to brighten your smile up and have your smile confidence to the future"
+        android:textColor="#807C7C"
+        android:textSize="12sp"
+        android:translationZ="90dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_set_appointment"
+        android:layout_width="146.38dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="599dp"
+        android:background="@drawable/bg_button1"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Book Now"
+        android:textColor="@color/white"
+        android:textSize="15dp"/>
+
+</RelativeLayout>
