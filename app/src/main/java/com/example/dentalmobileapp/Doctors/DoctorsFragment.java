@@ -3,42 +3,41 @@ package com.example.dentalmobileapp.Doctors;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dentalmobileapp.Api.ApiClient;
+import com.example.dentalmobileapp.Api.ApiEndpoints;
 import com.example.dentalmobileapp.R;
+import com.example.dentalmobileapp.Services.ServiceAdapter;
+import com.example.dentalmobileapp.Services.ServiceResponse;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DoctorsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DoctorsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private List<DoctorResponse> doctors = new ArrayList<>();
+    private DoctorAdapter doctorAdapter;
 
     public DoctorsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DoctorsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DoctorsFragment newInstance(String param1, String param2) {
         DoctorsFragment fragment = new DoctorsFragment();
         Bundle args = new Bundle();
@@ -61,6 +60,44 @@ public class DoctorsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctors, container, false);
+        View view = inflater.inflate(R.layout.fragment_doctors, container, false);
+
+        RecyclerView doctorRecyclerView = view.findViewById(R.id.view_doctors);
+        doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        doctorAdapter = new DoctorAdapter(getContext(), doctors);
+        doctorRecyclerView.setAdapter(doctorAdapter);
+
+        fetchDoctors();
+
+        return view;
+    }
+
+    public void fetchDoctors() {
+        ApiClient apiClient = new ApiClient();
+        ApiEndpoints apiService = apiClient.getApiService();
+        Call<List<DoctorResponse>> call = apiService.getDoctors();
+
+        call.enqueue(new Callback<List<DoctorResponse>>() {
+            @Override
+            public void onResponse(Call<List<DoctorResponse>> call, Response<List<DoctorResponse>> response) {
+                if (response.isSuccessful()) {
+                    List<DoctorResponse> fetchedDoctors = response.body();
+                    if (fetchedDoctors != null && !fetchedDoctors.isEmpty()) {
+                        doctors.clear();
+                        doctors.addAll(fetchedDoctors);
+                        doctorAdapter.notifyDataSetChanged();
+                    } else {
+                        // Handle empty or null response
+                    }
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DoctorResponse>> call, Throwable t) {
+                // Handle failure
+            }
+        });
     }
 }

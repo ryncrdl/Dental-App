@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/doctors_container"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/doctors_background"
+        android:padding="20dp"
+        >
+
+        <TextView
+            android:id="@+id/doctor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:maxEms="20"
+            android:singleLine="true"
+            android:text="Doctor Nameeeeeeeeeeeeeeeeeeeeeeeee"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_bold"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/doctor_contact_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/doctor_name"
+            android:fontFamily="@font/poppins_bold"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:maxLines="4"
+            android:text="Contact:"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/doctor_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/doctor_contact_label"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/doctor_name"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:singleLine="true"
+            android:text="0912345678"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/doctor_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/doctor_contact_label"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:fontFamily="@font/poppins_bold"
+            android:textStyle="bold"
+            android:maxLines="4"
+            android:text="Email:"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/doctor_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/doctor_email_label"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/doctor_contact_label"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:singleLine="true"
+            android:text="example@gmail.com"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/doctor_address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/doctor_email_label"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_bold"
+            android:textStyle="bold"
+            android:maxEms="20"
+            android:maxLines="4"
+            android:text="Address:"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/doctor_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/doctor_address_label"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/doctor_email_label"
+            android:layout_marginStart="100dp"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:maxLines="2"
+            android:text="Montalban, Rizallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"
+            android:textColor="#323232"
+            android:textSize="13sp"
+            android:lineHeight="20dp"
+            />
+    </FrameLayout>
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.dentalmobileapp.Api;
 
+import com.example.dentalmobileapp.Doctors.DoctorResponse;
 import com.example.dentalmobileapp.Services.ServiceResponse;
 import com.example.dentalmobileapp.Verification.CreateClient;
 
@@ -21,4 +22,8 @@ public interface ApiEndpoints {
     //Services
     @GET("app/dental-pbjlw/endpoint/services")
     Call<List<ServiceResponse>> getServices();
+
+    //Doctors
+    @GET("app/dental-pbjlw/endpoint/doctors")
+    Call<List<DoctorResponse>> getDoctors();
 }

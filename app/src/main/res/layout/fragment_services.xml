@@ -15,12 +15,20 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="205dp"
         app:srcCompat="@drawable/iconwithname" />
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ellipse_1"
+        android:onClick="goToProfile"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/view_services"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="140dp"
         />
 
 </RelativeLayout>
