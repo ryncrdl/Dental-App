@@ -65,7 +65,12 @@ public class SignUp extends AppCompatActivity {
     private void checkCredentials(String fullname, String username, String password, String confirmPassword){
         if(fullname.isEmpty()){
             Toast.makeText(SignUp.this, "Please your full name", Toast.LENGTH_SHORT).show();
-        }else if(username.isEmpty()){
+        }else if(password.length() <= 7){
+            Toast.makeText(SignUp.this, "password should be minimum 8 characters", Toast.LENGTH_SHORT).show();
+        }else if(username.length() <= 4){
+            Toast.makeText(SignUp.this, "username should be minimum 5 characters", Toast.LENGTH_SHORT).show();
+        }
+        else if(username.isEmpty()){
             Toast.makeText(SignUp.this, "Please your username", Toast.LENGTH_SHORT).show();
         }else if(password.isEmpty()){
             Toast.makeText(SignUp.this, "Please your password", Toast.LENGTH_SHORT).show();

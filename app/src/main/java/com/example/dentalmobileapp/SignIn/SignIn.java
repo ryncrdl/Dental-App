@@ -1,5 +1,6 @@
 package com.example.dentalmobileapp.SignIn;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,13 +41,6 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        if (sessionExists()) {
-            // Redirect to the login screen
-            Intent intent = new Intent(SignIn.this, Dashboard.class);
-            startActivity(intent);
-            finish(); // Optional, prevents going back to MainActivity
-        }
-
         firebaseAuth = FirebaseAuth.getInstance();
         username = findViewById(R.id.txt_username);
         password = findViewById(R.id.txt_password);
@@ -56,13 +50,10 @@ public class SignIn extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-                //Check valid email and password
+                //Check valid username and password
                 String getUsername = username.getText().toString().trim();
                 String getPassword = password.getText().toString().trim();
-                checkEmailAndPassword(getUsername, getPassword);
-
-
+                checkUsernameAndPassword(getUsername, getPassword);
             }
         });
 
@@ -75,13 +66,8 @@ public class SignIn extends AppCompatActivity {
         });
     }
 
-    private boolean sessionExists() {
-        // Check if the user's session exists in SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-        return sharedPreferences.getString("username", null) != null;
-    }
 
-    private void checkEmailAndPassword(String username, String password){
+    private void checkUsernameAndPassword(String username, String password){
         if(username.isEmpty()){
             Toast.makeText(SignIn.this, "Please your username", Toast.LENGTH_SHORT).show();
         }else if(password.isEmpty()){
@@ -105,34 +91,52 @@ public class SignIn extends AppCompatActivity {
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 
-        Call<CreateClient> call = apiEndpoints.signinClient(requestBody);
-        call.enqueue(new Callback<CreateClient>() {
+        Call<ClientResponse> call = apiEndpoints.signinClient(requestBody);
+        call.enqueue(new Callback<ClientResponse>() {
             @Override
-            public void onResponse(Call<CreateClient> call, Response<CreateClient> response) {
-
+            public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
+                ClientResponse createReponse = response.body();
                     if(response.code() == 200){
+                        String userId = createReponse.getId();
+                        String fullName = createReponse.getFullName();
+                        String username = createReponse.getUsername();
+                        String contactNumber = createReponse.getContactNumber();
+
+                        setLoggedInStatus(true);
+                        storeUserData(userId, fullName, username, contactNumber);
                         Toast.makeText(SignIn.this, "Successfully login", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignIn.this, Dashboard.class));
-                        saveSession(username, password);
                     }else {
+                        setLoggedInStatus(false);
                         Toast.makeText(SignIn.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
                     }
             }
             @Override
-            public void onFailure(Call<CreateClient> call, Throwable t) {
+            public void onFailure(Call<ClientResponse> call, Throwable t) {
                 Toast.makeText(SignIn.this, "Server failed!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void saveSession(String username, String password) {
-        // Store the user's session information, such as username, in SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+    private void storeUserData(String userId, String fullName, String username, String contactNumber) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("userId", userId);
+        editor.putString("full_name", fullName);
         editor.putString("username", username);
-        editor.putString("password", password);
+        editor.putString("contact_number", contactNumber);
+
         editor.apply();
     }
+
+    private void setLoggedInStatus(boolean isLoggedIn) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", isLoggedIn);
+        editor.apply();
+    }
+
 
 
 }

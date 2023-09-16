@@ -224,10 +224,6 @@ public class VerifyContactNumber extends AppCompatActivity {
                     }
                 });
     }
-
-
-
-
     private void createClient(String fullName, String username, String password, String contactNumber) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://us-east-1.aws.data.mongodb-api.com/")
@@ -241,6 +237,7 @@ public class VerifyContactNumber extends AppCompatActivity {
         jsonObject.addProperty("username", username);
         jsonObject.addProperty("password", password);
         jsonObject.addProperty("contactNumber", contactNumber);
+        jsonObject.addProperty("points", 0);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 

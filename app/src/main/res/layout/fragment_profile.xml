@@ -16,30 +16,59 @@
             android:layout_marginRight="205dp"
             app:srcCompat="@drawable/iconwithname" />
 
-        <!-- Current Password -->
-        <EditText
-            android:id="@+id/txt_current_password"
+        <TextView
+            android:id="@+id/txt_currentClient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/bg_textbox1"
             android:ems="10"
-            android:hint="Current Password"
-            android:inputType="textPassword"
-            android:padding="18dp"
-            android:textColorHint="#B9B9B9"
+            android:textAllCaps="true"
+            android:text="John Luis"
+            android:textStyle="bold"
+            android:textColor="@color/primaryColor"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/txt_currentClientUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:text="username"
+            android:textStyle="bold"
+            android:textColor="#B9B9B9"
+            android:textAlignment="center"
             android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txt_currentClientContactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:textAllCaps="true"
+            android:text="09134567890"
+            android:textStyle="bold"
+            android:textColor="#B9B9B9"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+
 
         <!-- New Password -->
         <EditText
             android:id="@+id/txt_new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_current_password"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/bg_textbox1"
             android:ems="10"
@@ -66,6 +95,20 @@
             android:textColorHint="#B9B9B9"
             android:textSize="15sp" />
 
+        <TextView
+            android:id="@+id/btn_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_change_password"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:text="Forgot Password"
+            android:textAlignment="center"
+            android:textColor="#B9B9B9"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <!-- Change Password Button -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_change_password"
@@ -78,10 +121,10 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_button1"
             android:fontFamily="@font/poppins_bold"
-            android:padding="18dp"
+            android:padding="15dp"
             android:text="Change Password"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <!-- Log Out Button -->
         <androidx.appcompat.widget.AppCompatButton
@@ -95,9 +138,9 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_button2"
             android:fontFamily="@font/poppins_bold"
-            android:padding="18dp"
+            android:padding="15dp"
             android:text="Log Out"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 </RelativeLayout>

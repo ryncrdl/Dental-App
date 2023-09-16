@@ -7,6 +7,9 @@ public class ClientResponse {
     @SerializedName("_id")
     private String id;
 
+    @SerializedName("fullName")
+    private String fullName;
+
     @SerializedName("username")
     private String username;
 
@@ -23,6 +26,10 @@ public class ClientResponse {
 
     public String getId() {
         return id;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public String getUsername() {

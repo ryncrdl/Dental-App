@@ -2,6 +2,7 @@ package com.example.dentalmobileapp.Api;
 
 import com.example.dentalmobileapp.Doctors.DoctorResponse;
 import com.example.dentalmobileapp.Services.ServiceResponse;
+import com.example.dentalmobileapp.SignIn.ClientResponse;
 import com.example.dentalmobileapp.Verification.CreateClient;
 
 import java.util.List;
@@ -13,11 +14,16 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 public interface ApiEndpoints {
 
+    //Clients
     @POST("app/dental-pbjlw/endpoint/signUp")
     Call<CreateClient> CreateClient(@Body RequestBody requestBody);
 
     @POST("app/dental-pbjlw/endpoint/signIn")
-    Call<CreateClient> signinClient(@Body RequestBody requestBody);
+    Call<ClientResponse> signinClient(@Body RequestBody requestBody);
+
+    @POST("app/dental-pbjlw/endpoint/changePassword")
+
+    Call<CreateClient> updatePassword(@Body RequestBody requestBody);
 
     //Services
     @GET("app/dental-pbjlw/endpoint/services")
@@ -26,4 +32,6 @@ public interface ApiEndpoints {
     //Doctors
     @GET("app/dental-pbjlw/endpoint/doctors")
     Call<List<DoctorResponse>> getDoctors();
+
+
 }

@@ -6,8 +6,7 @@
     tools:context=".SignUp.SignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sign_in_screen_bg"
-    >
+    android:background="@drawable/sign_in_screen_bg">
 
     <ImageView
         android:layout_width="match_parent"
@@ -16,7 +15,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="205dp"
         app:srcCompat="@drawable/iconwithname" />
-
 
     <ImageView
         android:layout_width="match_parent"
@@ -57,6 +55,7 @@
         android:background="@drawable/bg_textbox1"
         android:ems="10"
         android:hint="Enter your full name"
+        android:textColor="@color/black"
         android:inputType="text"
         android:padding="18dp"
         android:textColorHint="#B9B9B9"
@@ -72,6 +71,7 @@
         android:background="@drawable/bg_textbox1"
         android:ems="10"
         android:hint="Enter your username"
+        android:textColor="@color/black"
         android:inputType="text"
         android:padding="18dp"
         android:textColorHint="#B9B9B9"
@@ -87,6 +87,7 @@
         android:background="@drawable/bg_textbox1"
         android:ems="10"
         android:hint="Enter your password"
+        android:textColor="@color/black"
         android:inputType="textPassword"
         android:padding="18dp"
         android:textColorHint="#B9B9B9"
@@ -102,6 +103,7 @@
         android:background="@drawable/bg_textbox1"
         android:ems="10"
         android:hint="Confirm your password"
+        android:textColor="@color/black"
         android:inputType="textPassword"
         android:padding="18dp"
         android:textColorHint="#B9B9B9"
@@ -118,31 +120,37 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Next Step"
         android:textColor="@color/white"
-        android:textSize="20dp"
-       />
+        android:textSize="20dp" />
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="700dp"
-        android:layout_marginRight="60dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Already have an account?"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/btn_signIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="170dp"
-        android:layout_marginTop="700dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Sign In"
-        android:textAlignment="center"
-        android:textColor="#019874"
-        android:textSize="15sp"
-       />
+        <TextView
+            android:id="@+id/account_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Already have an account?"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/btn_signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Sign In"
+            android:textColor="#019874"
+            android:textSize="15sp" />
+    </LinearLayout>
+
 </RelativeLayout>

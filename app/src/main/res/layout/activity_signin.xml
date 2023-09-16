@@ -47,11 +47,16 @@
         android:background="@drawable/bg_textbox1"
         android:ems="10"
         android:hint="Enter your username"
+        android:drawableRight="@drawable/username"
+        android:textColor="@color/black"
         android:inputType="text"
         android:padding="18dp"
         android:textColorHint="#B9B9B9"
         android:textSize="15sp" />
 
+    
+    
+    
     <EditText
         android:id="@+id/txt_password"
         android:layout_width="match_parent"
@@ -62,6 +67,8 @@
         android:background="@drawable/bg_textbox1"
         android:ems="10"
         android:hint="Enter your password"
+        android:drawableRight="@drawable/key_solid"
+        android:textColor="@color/black"
         android:inputType="textPassword"
         android:padding="18dp"
         android:textColorHint="#B9B9B9"
@@ -80,32 +87,34 @@
         android:textColor="@color/white"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/btnSignUp"
+    <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="690dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Sign Up"
-        android:textAlignment="center"
-        android:textColor="#019874"
-        android:textSize="15sp"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="20dp"
+        android:gravity="center_horizontal">
 
+        <TextView
+            android:id="@+id/account_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Don't have an account?"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/btn_signUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="690dp"
-        android:layout_marginRight="60dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Dont have an account?"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-    />
-
+        <TextView
+            android:id="@+id/btn_signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Sign Up"
+            android:textColor="#019874"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 </RelativeLayout>

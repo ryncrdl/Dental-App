@@ -23,7 +23,7 @@
         android:layout_marginLeft="290dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/ellipse_1"
-        android:onClick="goToProfile"/>
+    />
 
     <TextView
         android:id="@+id/textView12"
@@ -61,49 +61,51 @@
         android:textSize="20dp" />
 
 
-    <EditText
-        android:id="@+id/editTextText2"
+    <Spinner
+        android:id="@+id/txt_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="350dp"
         android:layout_marginEnd="40dp"
+        android:layout_gravity="center"
+        android:padding="18dp"
+        android:textSize="15sp"
         android:background="@drawable/bg_textbox1"
-        android:ems="10"
-        android:hint="Please select a date"
+
         android:inputType="date"
-        android:padding="18dp"
-        android:textColorHint="#B9B9B9"
-        android:textSize="15sp" />
+    />
 
-    <EditText
-        android:id="@+id/editTextText3"
+    <Spinner
+        android:id="@+id/txt_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_date"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_gravity="center"
+        android:padding="18dp"
+        android:textSize="15sp"
+
+        android:background="@drawable/bg_textbox1"
+
+        />
+
+    <Spinner
+        android:id="@+id/txt_doctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="420dp"
+        android:layout_below="@+id/txt_service"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_textbox1"
-        android:ems="10"
-        android:hint="Please select a service"
-        android:inputType="text"
+        android:layout_gravity="center"
         android:padding="18dp"
-        android:textColorHint="#B9B9B9"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:background="@drawable/bg_textbox1"
 
-    <EditText
-        android:id="@+id/editTextText4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="490dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/bg_textbox1"
-        android:ems="10"
-        android:hint="Please select a doctor"
-        android:inputType="text"
-        android:padding="18dp"
-        android:textColorHint="#B9B9B9"
-        android:textSize="15sp" />
+        />
+
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.dentalmobileapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,11 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!sessionExists()) {
-            // Redirect to the login screen
-            Intent intent = new Intent(MainActivity.this, Dashboard.class);
-            startActivity(intent);
-            finish(); // Optional, prevents going back to MainActivity
+        if (isUserLoggedIn()) {
+            // Redirect to the dashboard
+            startActivity(new Intent(this, Dashboard.class));
+            finish();
         }
 
         btnGetStarted = findViewById(R.id.btn_getStarted);
@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    private boolean sessionExists() {
-        // Check if the user's session exists in SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-        return sharedPreferences.getString("username", null) != null;
+    private boolean isUserLoggedIn() {
+       SharedPreferences sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isLoggedIn", false);
     }
+
+
 }
