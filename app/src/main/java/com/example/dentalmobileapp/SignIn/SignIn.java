@@ -41,6 +41,12 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
+        if (isUserLoggedIn()) {
+            // Redirect to the dashboard
+            startActivity(new Intent(this, Dashboard.class));
+            finish();
+        }
+
         firebaseAuth = FirebaseAuth.getInstance();
         username = findViewById(R.id.txt_username);
         password = findViewById(R.id.txt_password);
@@ -96,20 +102,24 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
                 ClientResponse createReponse = response.body();
-                    if(response.code() == 200){
-                        String userId = createReponse.getId();
-                        String fullName = createReponse.getFullName();
-                        String username = createReponse.getUsername();
-                        String contactNumber = createReponse.getContactNumber();
+                if (response.code() == 200) {
+                    String userId = createReponse.getId();
+                    String fullName = createReponse.getFullName();
+                    String username = createReponse.getUsername();
+                    String contactNumber = createReponse.getContactNumber();
 
-                        setLoggedInStatus(true);
-                        storeUserData(userId, fullName, username, contactNumber);
-                        Toast.makeText(SignIn.this, "Successfully login", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignIn.this, Dashboard.class));
-                    }else {
-                        setLoggedInStatus(false);
-                        Toast.makeText(SignIn.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
-                    }
+                    setLoggedInStatus(true);
+                    storeUserData(userId, fullName, username, contactNumber);
+                    Toast.makeText(SignIn.this, "Successfully login", Toast.LENGTH_SHORT).show();
+
+                    // Finish the current SignIn activity
+                    finish();
+                    startActivity(new Intent(SignIn.this, Dashboard.class));
+                } else {
+                    setLoggedInStatus(false);
+                    Toast.makeText(SignIn.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+                }
+
             }
             @Override
             public void onFailure(Call<ClientResponse> call, Throwable t) {
@@ -137,6 +147,10 @@ public class SignIn extends AppCompatActivity {
         editor.apply();
     }
 
+    private boolean isUserLoggedIn() {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isLoggedIn", false);
+    }
 
 
 }

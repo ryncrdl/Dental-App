@@ -1,8 +1,5 @@
 package com.example.dentalmobileapp.Dashboard;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -15,14 +12,10 @@ import com.example.dentalmobileapp.Home.HomeFragment;
 import com.example.dentalmobileapp.Profile.ProfileFragment;
 import com.example.dentalmobileapp.R;
 import com.example.dentalmobileapp.Services.ServicesFragment;
-import com.example.dentalmobileapp.SignIn.SignIn;
 import com.example.dentalmobileapp.databinding.ActivityDashboardBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class Dashboard extends AppCompatActivity {
-    FirebaseAuth auth;
-
     ActivityDashboardBinding binding;
     BottomNavigationView bottomNavigationView;
 
@@ -54,18 +47,15 @@ public class Dashboard extends AppCompatActivity {
 
             return true;
         });
+
     }
 
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
 
-    private void handleLogout(){
-        auth.signOut();
-        startActivity(new Intent(Dashboard.this, SignIn.class));
-        finish();
-    }
 }

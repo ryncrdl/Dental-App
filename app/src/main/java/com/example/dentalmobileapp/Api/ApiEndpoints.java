@@ -1,5 +1,6 @@
 package com.example.dentalmobileapp.Api;
 
+import com.example.dentalmobileapp.Appointment.AppointmentResponse;
 import com.example.dentalmobileapp.Doctors.DoctorResponse;
 import com.example.dentalmobileapp.Services.ServiceResponse;
 import com.example.dentalmobileapp.SignIn.ClientResponse;
@@ -32,6 +33,12 @@ public interface ApiEndpoints {
     //Doctors
     @GET("app/dental-pbjlw/endpoint/doctors")
     Call<List<DoctorResponse>> getDoctors();
+
+
+    // Appointment
+    @POST("app/dental-pbjlw/endpoint/submitAppointment")
+    Call<AppointmentResponse> submitAppointment(@Body RequestBody requestBody);
+
 
 
 }
