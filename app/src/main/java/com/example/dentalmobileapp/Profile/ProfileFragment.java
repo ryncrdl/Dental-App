@@ -16,12 +16,17 @@ import android.widget.Toast;
 
 import com.example.dentalmobileapp.Api.ApiEndpoints;
 import com.example.dentalmobileapp.R;
+import com.example.dentalmobileapp.Services.ServiceResponse;
+import com.example.dentalmobileapp.SignIn.ClientResponse;
 import com.example.dentalmobileapp.SignIn.SignIn;
 import com.example.dentalmobileapp.SignUp.SignUp;
 import com.example.dentalmobileapp.Verification.CreateClient;
+import com.example.dentalmobileapp.Verification.VerifyContactNumber;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.JsonObject;
 
+import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.MediaType;
@@ -41,10 +46,11 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
 
     private String userId;
-    private TextView fullName, username, contactNumber;
+    private TextView fullName, username, contactNumber, clientPoints;
     private EditText password, confirmPassword;
     private AppCompatButton btnLogout, btnChangePassword;
     private FirebaseAuth firebaseAuth;
+    private String getPoints;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -77,6 +83,7 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btn_logout);
         fullName = view.findViewById(R.id.txt_currentClient);
         username = view.findViewById(R.id.txt_currentClientUsername);
+        clientPoints = view.findViewById(R.id.txt_currentClientPoints);
         password = view.findViewById(R.id.txt_new_password);
         confirmPassword = view.findViewById(R.id.txt_confirm_password);
         contactNumber = view.findViewById(R.id.txt_currentClientContactNumber);
@@ -170,6 +177,7 @@ public class ProfileFragment extends Fragment {
             fullName.setText(getFullName);
             username.setText(getUsername);
             contactNumber.setText(getContactNumber);
+            GetClientPoints(getUserId);
         } else {
             // Handle the case where the data is not available
         }
@@ -206,4 +214,36 @@ public class ProfileFragment extends Fragment {
         editor.putBoolean("isLoggedIn", isLoggedIn);
         editor.apply();
     }
+
+    private void GetClientPoints(String userId) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://us-east-1.aws.data.mongodb-api.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiEndpoints apiEndpoints = retrofit.create(ApiEndpoints.class);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("userId", userId);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+
+        Call<ClientResponse> call = apiEndpoints.GetClientPoints(requestBody);
+        call.enqueue(new Callback<ClientResponse>() {
+            @Override
+            public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
+                ClientResponse points = response.body();
+                String getPoints = points.getPoints();
+                if (response.isSuccessful()) {
+                    clientPoints.setText("Reward Points: " + getPoints);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ClientResponse> call, Throwable t) {
+                // Handle failure
+            }
+        });
+    }
+
 }

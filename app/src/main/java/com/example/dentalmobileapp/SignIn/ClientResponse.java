@@ -19,6 +19,9 @@ public class ClientResponse {
     @SerializedName("contactNumber")
     private String contactNumber;
 
+    @SerializedName("points")
+    private String points;
+
     @SerializedName("isValid")
     private boolean isValid;
 
@@ -42,6 +45,10 @@ public class ClientResponse {
 
     public String getContactNumber() {
         return contactNumber;
+    }
+
+    public String getPoints() {
+        return points;
     }
 
     public boolean isValid() {

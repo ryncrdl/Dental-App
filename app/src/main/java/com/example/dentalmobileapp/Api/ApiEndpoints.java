@@ -19,6 +19,12 @@ public interface ApiEndpoints {
     @POST("app/dental-pbjlw/endpoint/signUp")
     Call<CreateClient> CreateClient(@Body RequestBody requestBody);
 
+    @POST("app/dental-pbjlw/endpoint/getClientPoints")
+    Call<ClientResponse> GetClientPoints(@Body RequestBody requestBody);
+
+    @POST("app/dental-pbjlw/endpoint/checkContactNumberAlreadyUsed")
+    Call<CreateClient> CheckContactNumberExists(@Body RequestBody requestBody);
+
     @POST("app/dental-pbjlw/endpoint/signIn")
     Call<ClientResponse> signinClient(@Body RequestBody requestBody);
 

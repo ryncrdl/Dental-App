@@ -8,6 +8,7 @@
     tools:context=".Profile.ProfileFragment"
     android:background="@drawable/sign_in_screen_bg"
     >
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,6 +56,21 @@
             android:ems="10"
             android:textAllCaps="true"
             android:text="09134567890"
+            android:textStyle="bold"
+            android:textColor="#B9B9B9"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txt_currentClientPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:textAllCaps="true"
+            android:text="Reward Points: 0"
             android:textStyle="bold"
             android:textColor="#B9B9B9"
             android:textAlignment="center"

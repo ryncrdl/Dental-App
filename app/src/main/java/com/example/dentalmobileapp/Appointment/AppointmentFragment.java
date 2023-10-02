@@ -210,7 +210,7 @@ public class AppointmentFragment extends Fragment {
         String base64Image = "";
         if(selectedImageUri != null){
             imageBytes = uriToByteArray(selectedImageUri);
-            Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+            base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
         }
 
 

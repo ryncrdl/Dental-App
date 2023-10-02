@@ -100,36 +100,15 @@ public class VerifyContactNumber extends AppCompatActivity {
         btnSendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Cancel any ongoing countdown timer
-                if (countdownTimer != null) {
-                    countdownTimer.cancel();
-                }
-
-                btnSendCode.setEnabled(false);
-
                 String phoneNumber = contactNumber.getText().toString().trim();
 
                 if(phoneNumber.isEmpty()){
                     Toast.makeText(VerifyContactNumber.this, "Enter valid phone number!", Toast.LENGTH_SHORT).show();
                 }else {
-                    sendVerificationCode(phoneNumber);
+                    checkContactNumberExists(phoneNumber);
                 }
 
 
-                countdownTimer = new CountDownTimer(ENABLE_DELAY_MS, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        // Update button text with remaining time
-                        btnSendCode.setText(millisUntilFinished / 1000 + "s");
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        btnSendCode.setEnabled(true);
-                        btnSendCode.setText("Send Code");
-                    }
-                }.start();
             }
 
 
@@ -173,7 +152,63 @@ public class VerifyContactNumber extends AppCompatActivity {
         });
     }
 
+    private void checkContactNumberExists(String phoneNumber) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://us-east-1.aws.data.mongodb-api.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiEndpoints apiEndpoints = retrofit.create(ApiEndpoints.class);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("contactNumber", phoneNumber);
+
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+
+        Call<CreateClient> call = apiEndpoints.CheckContactNumberExists(requestBody);
+        call.enqueue(new Callback<CreateClient>() {
+            @Override
+            public void onResponse(Call<CreateClient> call, Response<CreateClient> response) {
+                if (response.isSuccessful()) {
+                    if(response.code() == 403){
+                        Toast.makeText(VerifyContactNumber.this, "Contact Number is already used.", Toast.LENGTH_SHORT).show();
+                    }else if(response.code() == 200) {
+                        sendVerificationCode(phoneNumber);
+                    }
+                } else {
+                    Toast.makeText(VerifyContactNumber.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreateClient> call, Throwable t) {
+                Toast.makeText(VerifyContactNumber.this, "Server Failure.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void sendVerificationCode(String phoneNumber) {
+        btnSendCode.setEnabled(false);
+
+        // Cancel any ongoing countdown timer
+        if (countdownTimer != null) {
+            countdownTimer.cancel();
+        }
+        countdownTimer = new CountDownTimer(ENABLE_DELAY_MS, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                btnSendCode.setText(millisUntilFinished / 1000 + "s");
+            }
+
+            @Override
+            public void onFinish() {
+                btnSendCode.setEnabled(true);
+                btnSendCode.setText("Send Code");
+            }
+        }.start();
+
+
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber("+63" + phoneNumber) // Phone number to verify
                 .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
@@ -224,6 +259,7 @@ public class VerifyContactNumber extends AppCompatActivity {
                     }
                 });
     }
+
     private void createClient(String fullName, String username, String password, String contactNumber) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://us-east-1.aws.data.mongodb-api.com/")
@@ -237,6 +273,7 @@ public class VerifyContactNumber extends AppCompatActivity {
         jsonObject.addProperty("username", username);
         jsonObject.addProperty("password", password);
         jsonObject.addProperty("contactNumber", contactNumber);
+        jsonObject.addProperty("rfidNumber", "");
         jsonObject.addProperty("points", 0);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
@@ -246,15 +283,20 @@ public class VerifyContactNumber extends AppCompatActivity {
             @Override
             public void onResponse(Call<CreateClient> call, Response<CreateClient> response) {
                 if (response.isSuccessful()) {
-                    startActivity(new Intent(VerifyContactNumber.this, SignIn.class));
+                    if(response.code() == 200){
+                        startActivity(new Intent(VerifyContactNumber.this, SignIn.class));
+                    }else if(response.code() == 400) {
+                        Toast.makeText(VerifyContactNumber.this, response.message(), Toast.LENGTH_SHORT);
+                    }
                 } else {
-                    Toast.makeText(VerifyContactNumber.this, "\"Client creation failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyContactNumber.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CreateClient> call, Throwable t) {
                 Toast.makeText(VerifyContactNumber.this, "Client creation failed.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
