@@ -227,8 +227,8 @@ public class AppointmentFragment extends Fragment {
         jsonObject.addProperty("contactNumber", getContactNumber);
         jsonObject.addProperty("Date", getDate);
         jsonObject.addProperty("Service", getService);
-        jsonObject.addProperty("Requested Doctor", getDoctor);
-        jsonObject.addProperty("Proof of Payment", base64Image);
+        jsonObject.addProperty("RequestedDoctor", getDoctor);
+        jsonObject.addProperty("ProofofPayment", base64Image);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 

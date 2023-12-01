@@ -50,7 +50,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -101,12 +101,12 @@ public class SignIn extends AppCompatActivity {
         call.enqueue(new Callback<ClientResponse>() {
             @Override
             public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
-                ClientResponse createReponse = response.body();
+                ClientResponse clientResponse = response.body();
                 if (response.code() == 200) {
-                    String userId = createReponse.getId();
-                    String fullName = createReponse.getFullName();
-                    String username = createReponse.getUsername();
-                    String contactNumber = createReponse.getContactNumber();
+                    String userId = clientResponse.getId();
+                    String fullName = clientResponse.getFullName();
+                    String username = clientResponse.getUsername();
+                    String contactNumber = clientResponse.getContactNumber();
 
                     setLoggedInStatus(true);
                     storeUserData(userId, fullName, username, contactNumber);

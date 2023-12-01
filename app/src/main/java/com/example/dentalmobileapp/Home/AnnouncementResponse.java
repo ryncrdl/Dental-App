@@ -1,17 +1,17 @@
-package com.example.dentalmobileapp.Services;
+package com.example.dentalmobileapp.Home;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ServiceResponse implements Parcelable {
+public class AnnouncementResponse implements Parcelable {
 
     private String _id;
-    private String Title, Description, Price, Payment;
+    private String Title, Context;
     private ImageData image;
 
     public static class ImageData implements Parcelable {
         private int Subtype;
-        private String Data; //
+        private String Data;
 
         protected ImageData(Parcel in) {
             Subtype = in.readInt();
@@ -51,24 +51,22 @@ public class ServiceResponse implements Parcelable {
         }
     }
 
-    protected ServiceResponse(Parcel in) {
+    protected AnnouncementResponse(Parcel in) {
         _id = in.readString();
         image = in.readParcelable(ImageData.class.getClassLoader());
         Title = in.readString();
-        Description = in.readString();
-        Price = in.readString();
-        Payment = in.readString();
-    }
+        Context = in.readString();
 
-    public static final Creator<ServiceResponse> CREATOR = new Creator<ServiceResponse>() {
+    }
+    public static final Creator<AnnouncementResponse> CREATOR = new Creator<AnnouncementResponse>() {
         @Override
-        public ServiceResponse createFromParcel(Parcel in) {
-            return new ServiceResponse(in);
+        public AnnouncementResponse createFromParcel(Parcel in) {
+            return new AnnouncementResponse(in);
         }
 
         @Override
-        public ServiceResponse[] newArray(int size) {
-            return new ServiceResponse[size];
+        public AnnouncementResponse[] newArray(int size) {
+            return new AnnouncementResponse[size];
         }
     };
 
@@ -82,30 +80,21 @@ public class ServiceResponse implements Parcelable {
         dest.writeString(_id);
         dest.writeParcelable(image, flags);
         dest.writeString(Title);
-        dest.writeString(Description);
-        dest.writeString(Price);
-        dest.writeString(Payment);
+        dest.writeString(Context);
     }
 
     public ImageData getImage() {
         return image;
     }
 
-    public String getServiceName() {
+    public String getAnnouncementName() {
         return Title;
     }
 
-    public String getServiceDescription() {
-        return Description;
+    public String getAnnouncementContext() {
+        return Context;
     }
 
-    public String getServicePrice() {
-        return Price;
-    }
-
-    public String getServicePayment() {
-        return Payment;
-    }
 
     public String get_id() {
         return _id;

@@ -1,15 +1,11 @@
 package com.example.dentalmobileapp.Services;
 
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,12 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ServicesFragment extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
 
     private List<ServiceResponse> services = new ArrayList<>();
     private ServiceAdapter serviceAdapter;

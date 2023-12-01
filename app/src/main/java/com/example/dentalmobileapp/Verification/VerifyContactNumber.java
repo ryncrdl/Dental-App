@@ -170,15 +170,11 @@ public class VerifyContactNumber extends AppCompatActivity {
         call.enqueue(new Callback<CreateClient>() {
             @Override
             public void onResponse(Call<CreateClient> call, Response<CreateClient> response) {
-                if (response.isSuccessful()) {
                     if(response.code() == 403){
                         Toast.makeText(VerifyContactNumber.this, "Contact Number is already used.", Toast.LENGTH_SHORT).show();
                     }else if(response.code() == 200) {
                         sendVerificationCode(phoneNumber);
                     }
-                } else {
-                    Toast.makeText(VerifyContactNumber.this, response.message(), Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override

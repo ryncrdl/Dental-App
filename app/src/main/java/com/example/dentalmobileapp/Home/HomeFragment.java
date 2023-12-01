@@ -1,51 +1,89 @@
 package com.example.dentalmobileapp.Home;
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.example.dentalmobileapp.Api.ApiClient;
+import com.example.dentalmobileapp.Api.ApiEndpoints;
 import com.example.dentalmobileapp.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class HomeFragment extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private List<AnnouncementResponse> announcements = new ArrayList<>();
+    private AnnouncementAdapter announcementAdapter;
+    private ProgressBar progressBar;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        progressBar = view.findViewById(R.id.progress_bar);
+        RecyclerView announcementRecycleView = view.findViewById(R.id.view_announcements);
+        announcementRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        announcementAdapter = new AnnouncementAdapter(getContext(), announcements);
+        announcementRecycleView.setAdapter(announcementAdapter);
+
+        fetchAnnouncements();
+
+        return view;
     }
+
+    public void fetchAnnouncements() {
+        showLoading();
+
+        ApiClient apiClient = new ApiClient();
+        ApiEndpoints apiService = apiClient.getApiService();
+        Call<List<AnnouncementResponse>> call = apiService.getAnnouncements();
+
+        call.enqueue(new Callback<List<AnnouncementResponse>>() {
+            @Override
+            public void onResponse(Call<List<AnnouncementResponse>> call, Response<List<AnnouncementResponse>> response) {
+                hideLoading();
+
+                if (response.isSuccessful()) {
+                    List<AnnouncementResponse> fetchedAnnouncements = response.body();
+                    if (fetchedAnnouncements != null && !fetchedAnnouncements.isEmpty()) {
+                        announcements.clear();
+                        announcements.addAll(fetchedAnnouncements);
+                        announcementAdapter.notifyDataSetChanged();
+                    } else {
+                        // Handle empty or null response
+                    }
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AnnouncementResponse>> call, Throwable t) {
+                hideLoading();
+            }
+        });
+    }
+    private void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading() {
+        progressBar.setVisibility(View.GONE);
+    }
+
 }

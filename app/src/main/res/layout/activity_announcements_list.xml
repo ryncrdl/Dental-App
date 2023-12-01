@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/service_container">
+    android:id="@+id/announcements_container"
+    >
 
 
     <androidx.cardview.widget.CardView
-
         android:layout_width="match_parent"
         android:layout_height="160dp"
         app:cardElevation="5dp"
@@ -24,7 +24,7 @@
             >
 
         <ImageView
-            android:id="@+id/services_image"
+            android:id="@+id/announcement_image"
             android:layout_width="100dp"
             android:layout_height="120dp"
             android:layout_marginStart="15dp"
@@ -33,7 +33,7 @@
              />
 
         <TextView
-            android:id="@+id/service_name"
+            android:id="@+id/announcement_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -42,7 +42,7 @@
             android:layout_toEndOf="@id/services_image"
             android:maxEms="20"
             android:singleLine="true"
-            android:text="Service Nameeeeeeeeeeeeeeee"
+            android:text="Announcement Nameeeeeeeeeeeeeeee"
             android:textColor="@color/black"
             android:layout_marginTop="30dp"
             android:textSize="18sp"
@@ -50,7 +50,7 @@
 
 
         <TextView
-            android:id="@+id/service_description"
+            android:id="@+id/announcement_context"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
