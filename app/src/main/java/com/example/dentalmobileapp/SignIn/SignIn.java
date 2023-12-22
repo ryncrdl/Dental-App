@@ -1,5 +1,7 @@
 package com.example.dentalmobileapp.SignIn;
 
+import static com.example.dentalmobileapp.Utils.Hashing.verifyPassword;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +18,7 @@ import com.example.dentalmobileapp.Api.ApiEndpoints;
 import com.example.dentalmobileapp.Dashboard.Dashboard;
 import com.example.dentalmobileapp.R;
 import com.example.dentalmobileapp.SignUp.SignUp;
+import com.example.dentalmobileapp.Utils.LoadingScreen;
 import com.example.dentalmobileapp.Verification.CreateClient;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,6 +87,7 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void validateCredentials(String username, String password){
+        LoadingScreen.showLoadingModal(this);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://us-east-1.aws.data.mongodb-api.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -93,7 +97,7 @@ public class SignIn extends AppCompatActivity {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("username", username);
-        jsonObject.addProperty("password", password);
+//        jsonObject.addProperty("password", password);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 
@@ -101,20 +105,26 @@ public class SignIn extends AppCompatActivity {
         call.enqueue(new Callback<ClientResponse>() {
             @Override
             public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
+                LoadingScreen.hideLoadingModal();
                 ClientResponse clientResponse = response.body();
                 if (response.code() == 200) {
                     String userId = clientResponse.getId();
                     String fullName = clientResponse.getFullName();
                     String username = clientResponse.getUsername();
                     String contactNumber = clientResponse.getContactNumber();
+                    String getHashedPassword = clientResponse.getPassword();
+                    Boolean validate = verifyPassword(password, getHashedPassword);
+                    if(validate){
+                        setLoggedInStatus(true);
+                        storeUserData(userId, fullName, username, contactNumber);
+                        Toast.makeText(SignIn.this, "Successfully login", Toast.LENGTH_SHORT).show();
 
-                    setLoggedInStatus(true);
-                    storeUserData(userId, fullName, username, contactNumber);
-                    Toast.makeText(SignIn.this, "Successfully login", Toast.LENGTH_SHORT).show();
-
-                    // Finish the current SignIn activity
-                    finish();
-                    startActivity(new Intent(SignIn.this, Dashboard.class));
+                        // Finish the current SignIn activity
+                        finish();
+                        startActivity(new Intent(SignIn.this, Dashboard.class));
+                    }else{
+                        Toast.makeText(SignIn.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     setLoggedInStatus(false);
                     Toast.makeText(SignIn.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
@@ -123,7 +133,8 @@ public class SignIn extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ClientResponse> call, Throwable t) {
-                Toast.makeText(SignIn.this, "Server failed!", Toast.LENGTH_SHORT).show();
+                LoadingScreen.hideLoadingModal();
+                Toast.makeText(SignIn.this, "Please check internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }

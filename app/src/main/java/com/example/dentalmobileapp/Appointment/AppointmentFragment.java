@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -31,6 +33,8 @@ import com.example.dentalmobileapp.Doctors.DoctorResponse;
 import com.example.dentalmobileapp.R;
 import com.example.dentalmobileapp.Services.ServiceResponse;
 import com.example.dentalmobileapp.SignIn.SignIn;
+import com.example.dentalmobileapp.Utils.DateDialog;
+import com.example.dentalmobileapp.Utils.LoadingScreen;
 import com.example.dentalmobileapp.Verification.CreateClient;
 import com.example.dentalmobileapp.Verification.VerifyContactNumber;
 import com.google.gson.JsonObject;
@@ -56,7 +60,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppointmentFragment extends Fragment {
 
-    private Spinner date, service, doctor;
+    private Spinner service, doctor;
     private String[] dateListArray = new String[10];
     private Uri selectedImageUri = null;
     private AppCompatButton attachImageButton, btnSubmitAppointment;
@@ -64,6 +68,8 @@ public class AppointmentFragment extends Fragment {
     private RelativeLayout requiredContainer;
     private Boolean isRequiredPayment = false;
     private ProgressBar loadingService;
+    private EditText date;
+    private ImageView btnDate;
     private TextView downPayment;
     public AppointmentFragment() {
         // Required empty public constructor
@@ -77,7 +83,11 @@ public class AppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appointment, container, false);
-        date = view.findViewById(R.id.txt_date);
+        btnDate = view.findViewById(R.id.btnCalendar);
+        date = view.findViewById(R.id.txtDate);
+
+        btnDate.setOnClickListener(v -> DateDialog.openDateDialog(date, getContext()));
+
         service = view.findViewById(R.id.txt_service);
         doctor = view.findViewById(R.id.txt_doctor);
         attachImageButton = view.findViewById(R.id.btn_attach_image);
@@ -113,14 +123,9 @@ public class AppointmentFragment extends Fragment {
             }
         });
 
-        // Create a list of date strings
-        String[] dateList = generateDateList();
-        CustomSpinnerAdapter dateAdapter = new CustomSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item, dateList, "Select Date");
 
-        // Set the adapter for the Spinner
         loadServices();
-        loadDoctors();
-        date.setAdapter(dateAdapter);
+
 
         return view;
     }
@@ -173,12 +178,11 @@ public class AppointmentFragment extends Fragment {
     }
 
     private void checkIfAppointmentIsReady() {
-        String selectedDate = date.getSelectedItem().toString();
+        String selectedDate = date.getText().toString();
         String selectedService = service.getSelectedItem().toString();
         String selectedDoctor = doctor.getSelectedItem().toString();
 
-        // Check if the user has selected a date, service, doctor, and attached payment
-        if (!selectedDate.equals("Select Date") &&
+        if (!selectedDate.isEmpty() &&
                 !selectedService.equals("Select Service") &&
                 !selectedDoctor.equals("Select Doctor")) {
 
@@ -199,11 +203,12 @@ public class AppointmentFragment extends Fragment {
     }
 
     private void createAppointment() {
+        LoadingScreen.showLoadingModal(getContext());
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         String getUserId = sharedPreferences.getString("userId", "");
         String getFullName = sharedPreferences.getString("full_name", "");
         String getContactNumber = sharedPreferences.getString("contact_number", "");
-        String getDate = date.getSelectedItem().toString();
+        String getDate = date.getText().toString();
         String getService = service.getSelectedItem().toString();
         String getDoctor = doctor.getSelectedItem().toString();
         byte[] imageBytes = null;
@@ -236,11 +241,12 @@ public class AppointmentFragment extends Fragment {
         call.enqueue(new Callback<AppointmentResponse>() {
             @Override
             public void onResponse(Call<AppointmentResponse> call, Response<AppointmentResponse> response) {
+
                 if (response.isSuccessful()) {
                     Toast.makeText(requireContext(), "Appointment is sent, wait for SMS Text", Toast.LENGTH_SHORT).show();
-
+                    LoadingScreen.hideLoadingModal();
                     // Clear Spinners and attached image
-                    date.setSelection(0);
+                    date.setText("");
                     service.setSelection(0);
                     doctor.setSelection(0);
                     attachImageButton.setText("Attach Proof Payment Here");
@@ -249,13 +255,15 @@ public class AppointmentFragment extends Fragment {
                     // Navigate back to the home fragment
                     getParentFragmentManager().popBackStack();
                 } else {
+                    LoadingScreen.hideLoadingModal();
                     Toast.makeText(requireContext(), "Appointment creation failed.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AppointmentResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "Appointment creation failed.", Toast.LENGTH_SHORT).show();
+                LoadingScreen.hideLoadingModal();
+                Toast.makeText(getContext(), "Check internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -341,6 +349,7 @@ public class AppointmentFragment extends Fragment {
     }
 
     private void loadServices() {
+        LoadingScreen.showLoadingModal(getContext());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://us-east-1.aws.data.mongodb-api.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -362,7 +371,8 @@ public class AppointmentFragment extends Fragment {
                         serviceNames.add(service.getServiceName());
                     }
 
-                    setServiceSpinner(serviceNames); // Set up the custom spinner for services
+                    setServiceSpinner(serviceNames);
+                    loadDoctors();
                 } else {
                     // Handle unsuccessful response
                 }
@@ -387,6 +397,7 @@ public class AppointmentFragment extends Fragment {
         call.enqueue(new Callback<List<DoctorResponse>>() {
             @Override
             public void onResponse(Call<List<DoctorResponse>> call, Response<List<DoctorResponse>> response) {
+              LoadingScreen.hideLoadingModal();
                 if (response.isSuccessful()) {
                     List<DoctorResponse> doctors = response.body();
                     List<String> doctorNames = new ArrayList<>();
@@ -396,7 +407,7 @@ public class AppointmentFragment extends Fragment {
                         doctorNames.add("Doc. " + doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName());
                     }
 
-                    setDoctorSpinner(doctorNames); // Set up the custom spinner for doctors
+                    setDoctorSpinner(doctorNames);
                 } else {
                     // Handle unsuccessful response
                 }
@@ -404,7 +415,7 @@ public class AppointmentFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<DoctorResponse>> call, Throwable t) {
-                // Handle failure
+              LoadingScreen.hideLoadingModal();
             }
         });
     }

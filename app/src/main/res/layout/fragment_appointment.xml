@@ -43,26 +43,49 @@
         android:textColor="@color/black"
         android:textSize="15sp" />
 
-    <Spinner
-        android:id="@+id/txt_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="40dp"
-        android:layout_gravity="center"
-        android:padding="18dp"
-        android:textSize="15sp"
-        android:background="@drawable/bg_textbox1"
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_below="@id/textView11"
+            android:id="@+id/dateContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
 
-        android:inputType="date"
-    />
+            android:background="@drawable/bg_textbox1"
+            >
+            <EditText
+                android:padding="18dp"
+                android:id="@+id/txtDate"
+                android:layout_gravity="center"
+                android:layout_marginEnd="70dp"
+                android:layout_marginStart="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+               android:fontFamily="@font/poppins"
+                android:enabled="false"
+                android:background="@android:color/transparent"
+                android:hint="Select Date"
+                android:textColorHint="@color/black"
+                />
+
+            <ImageView
+                android:id="@+id/btnCalendar"
+                android:layout_width="20dp"
+                android:layout_gravity="center"
+                android:layout_height="20dp"
+                android:layout_marginStart="-50dp"
+                android:background="@drawable/calendar_icon"/>
+        </LinearLayout>
 
     <Spinner
         android:id="@+id/txt_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_date"
+        android:layout_below="@+id/dateContainer"
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"

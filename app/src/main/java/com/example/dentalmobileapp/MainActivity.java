@@ -54,5 +54,4 @@ public class MainActivity extends AppCompatActivity {
         return sharedPreferences.getBoolean("isLoggedIn", false);
     }
 
-
 }

@@ -26,6 +26,9 @@ public interface ApiEndpoints {
     @POST("app/dental-pbjlw/endpoint/checkContactNumberAlreadyUsed")
     Call<CreateClient> CheckContactNumberExists(@Body RequestBody requestBody);
 
+    @POST("app/dental-pbjlw/endpoint/checkUsername")
+    Call<CreateClient> CheckUsernameExists(@Body RequestBody requestBody);
+
     @POST("app/dental-pbjlw/endpoint/signIn")
     Call<ClientResponse> signinClient(@Body RequestBody requestBody);
 
